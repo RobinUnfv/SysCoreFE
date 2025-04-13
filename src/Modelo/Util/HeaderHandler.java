@@ -49,8 +49,8 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
                 SOAPHeader header = envelope.addHeader();
 //                SOAPElement security = header.addChildElement("Security", "wsse", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd");
                 
-//aguegue esto 
-envelope.setPrefix("soapenv");
+                //aguegue esto 
+                envelope.setPrefix("soapenv");
                 header.setPrefix("soapenv");
                 envelope.getBody().setPrefix("soapenv");
                 envelope.removeAttribute("xmlns:S");
@@ -63,7 +63,7 @@ envelope.setPrefix("soapenv");
                 
                 SOAPElement wsse = 
                 		envelope.addAttribute(new QName("xmlns:wsse"), "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd");
- //hastaqui arriba
+                //hastaqui arriba
  
                  SOAPElement security = 
                   header.addChildElement("Security", "wsse", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd");
@@ -71,16 +71,16 @@ envelope.setPrefix("soapenv");
 //                usernameToken.addAttribute(new QName("xmlns:wsu"), "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");
                 SOAPElement username = usernameToken.addChildElement("Username", "wsse");
 
-                //aqui va el RUC JUNTO AL USUARIO SECUNDARIO DE LA EMPRESA
+                //AQUI VA EL RUC JUNTO AL USUARIO SECUNDARIO DE LA EMPRESA DE DICO
                 username.addTextNode("20601441102SUDASYST");
 
                 SOAPElement password = usernameToken.addChildElement("Password", "wsse");
 //                password.setAttribute("Type", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText");
-                //aqui va la clave sol
+                //AQUI VA LA CLAVE
                 password.addTextNode("Lucho789");
                 //Print out the outbound SOAP message to System.out
-                    message.writeTo(System.out);
-                    System.out.println("");
+                message.writeTo(System.out);
+                System.out.println("");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -88,11 +88,9 @@ envelope.setPrefix("soapenv");
 
         } else {
             try {
-                    //This handler does nothing with the response from the Web Service so
-            //we just print out the SOAP message.
-            SOAPMessage message = smc.getMessage();
-            message.writeTo(System.out);
-            System.out.println("");
+                SOAPMessage message = smc.getMessage();
+                message.writeTo(System.out);
+                System.out.println("");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -101,12 +99,7 @@ envelope.setPrefix("soapenv");
         return outboundProperty;
 
     }
-/*QUITE ESTO
-    public Set getHeaders() {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        return null;
-    }
-*/
+    
     public Set getHeaders() {
     // The code below is added on order to invoke Spring secured WS.
     // Otherwise,

@@ -18,7 +18,39 @@ import javax.activation.DataSource;
  * @author luis_
  */
 public class ConnectionPool {
-     public static Connection obtenerConexion(String fuente) throws SQLException{
+    
+    public static Connection conexionOracle() throws SQLException {
+       String url = "jdbc:oracle:thin:@localhost:1521:BDNX1";
+       String usuario = "LLE";
+       String password = "YVL";
+       Connection conn = null;
+       try{
+         conn = DriverManager.getConnection(url, usuario, password);
+         if (conn != null){
+             System.out.println("Conexión establecido con éxito...");
+         }
+       } catch(SQLException e) {
+         System.out.println("Error al conectar con la base de datos de Oracle ; "+e.getMessage());
+         e.printStackTrace();
+       }
+       return conn;
+    }
+    
+    public static Connection obtenerConexionOracle() throws SQLException {
+      return conexionOracle();
+    }
+    
+    public static void closeConexionOracle(Connection cnn) {
+       try {
+          if(cnn != null) {
+             cnn.close();
+          }
+       } catch(Exception ex) {
+            ex.printStackTrace();
+       }
+    }
+    
+     public static Connection obtenerConexion(String fuente) throws SQLException {
         DataSource ds=null;
         Connection conexion=null;
         try{
